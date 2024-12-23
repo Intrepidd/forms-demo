@@ -1,0 +1,31 @@
+<%= turbo_refreshes_with(method: :morph, scroll: :preserve) %>
+
+<h1 class="text-3xl font-bold">Feedbacks</h1>
+
+<div class="my-5">
+  <%= link_to "New feedback", new_feedback_path, class: "underline" %>
+</div>
+
+<table class="table-auto w-full mt-10 border-collapse">
+  <thead>
+    <tr class="*:border *:border-gray-500 *:p-5">
+      <th>ID</th>
+      <th>Name</th>
+      <th>Rating</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr class="*:border *:border-gray-500 *:p-5">
+        <td><%= "Feedback##{feedback.id}" %></td>
+        <td><%= feedback.name %></td>
+        <td><%= feedback.rating %></td>
+        <td>
+          <%= link_to "Edit", edit_feedback_path(feedback) %>
+          <%= button_to "Destroy", feedback_path(feedback), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
